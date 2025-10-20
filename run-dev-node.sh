@@ -43,9 +43,6 @@ docker rm -f "${CONTAINER_NAME}" >/dev/null 2>&1 || true
 echo "Starting Nitro dev node..."
 docker run --rm --name "${CONTAINER_NAME}" -p 8547:8547 "${TARGET_IMAGE}" --dev --http.addr 0.0.0.0 --http.api=net,web3,eth,debug $EXTRA_ARGS &
 
-# Kill background processes when exiting
-trap 'kill $(jobs -p) 2>/dev/null' EXIT
-
 # Wait for the node to initialize
 echo "Waiting for the Nitro node to initialize..."
 
