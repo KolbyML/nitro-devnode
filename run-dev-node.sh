@@ -17,6 +17,8 @@ EXTRA_ARGS=""
 cleanup() {
   echo "Shutting down Docker container '${CONTAINER_NAME}'..."
   docker stop -t 30 "${CONTAINER_NAME}" >/dev/null 2>&1 || true
+
+  # Force remove the container if shutdown didn't work within the timeout period
   docker rm -f "${CONTAINER_NAME}" >/dev/null 2>&1 || true
 }
 trap cleanup INT TERM EXIT
